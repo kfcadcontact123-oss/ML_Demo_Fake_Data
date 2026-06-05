@@ -147,3 +147,11 @@ PURPOSES:
 3. Neural networks with PyTorch
 4. Model evaluation
 5. Machine Learning workflow
+
+FUTURE DEVELOPMENT FOR THE PROJECT:
+1. Hyperparameter tuning
+2. K-Fold Cross Validation
+3. Early Stopping
+4. Model Saving and Loading
+5. Deployment with Flask/FastAPI
+6. Real-world student dataset collection
