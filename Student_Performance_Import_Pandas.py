@@ -39,24 +39,28 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify = y
 )
 
-scaler = StandardScaler()
-
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test) #normalization
-
-X_train = torch.tensor(X_train, dtype = torch.float32)
-X_test = torch.tensor(X_test, dtype = torch.float32)
-
-y_train = torch.tensor(y_train, dtype = torch.float32).view(-1,1)
-y_test = torch.tensor(y_test, dtype = torch.float32).view(-1,1) 
-#convert qua torch tensor
-
 #chia tiếp train thành validation và train 2
 X_val = X_train[:200]
 y_val = y_train[:200]
 
 X_train2 = X_train[200:]
 y_train2 = y_train[200:]
+
+scaler = StandardScaler()
+
+X_train2 = scaler.fit_transform(X_train2)
+X_val = scaler.transform(X_val)
+X_test = scaler.transform(X_test) #normalization
+
+X_train2 = torch.tensor(X_train2, dtype = torch.float32)
+X_val = torch.tensor(X_val, dtype = torch.float32)
+X_test = torch.tensor(X_test, dtype = torch.float32)
+
+y_train2 = torch.tensor(y_train2, dtype = torch.float32).view(-1,1)
+y_val = torch.tensor(y_val, dtype = torch.float32).view(-1,1)
+y_train = torch.tensor(y_train, dtype = torch.float32).view(-1,1)
+y_test = torch.tensor(y_test, dtype = torch.float32).view(-1,1) 
+#convert qua torch tensor
 
 train_losses = []
 val_losses = []
@@ -137,7 +141,6 @@ recall = recall_score(
     y_true,
     y_pred
 )
-
 print('recall: ', recall)
 f1 = f1_score(
     y_true,
@@ -148,7 +151,6 @@ import matplotlib.pyplot as plt
 
 plt.plot(train_losses)
 plt.plot(val_losses)
-
 plt.legend([
     "train",
     "validation"
